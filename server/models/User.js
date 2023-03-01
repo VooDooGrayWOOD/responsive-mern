@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 const UserSchema = new mongoose.Schema(
     {
@@ -6,40 +6,40 @@ const UserSchema = new mongoose.Schema(
             type: String,
             required: true,
             min: 2,
-            max: 50,
+            max: 50
         },
         lastName: {
             type: String,
             required: true,
             min: 2,
-            max: 50,
+            max: 50
         },
         email: {
             type: String,
             required: true,
             max: 50,
-            unique: true,
+            unique: true
         },
         password: {
             type: String,
             required: true,
-            min: 5,
+            min: 5
         },
         picturePath: {
             type: String,
-            default: "",
+            default: ''
         },
         friends: {
             type: Array,
-            default: [],
+            default: []
         },
         location: String,
-        ocupation: String,
+        occupation: String,
         viewedProfile: Number,
-        impressions: Number,
+        impressions: Number
     },
     { timestamps: true }
-);
+)
 
-const User = mongoose.model("User", UserSchema);
-export default User;
+const User = mongoose.model('User', UserSchema)
+export default User
