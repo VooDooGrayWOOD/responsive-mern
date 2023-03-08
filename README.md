@@ -2,6 +2,13 @@
 
 <h3 align="center">Deploy -> https://responsive-mern.voodoograywood.ru/ </h3>
 
+On deploy use: 
+    
+    login: voo@mail.ru, 
+    pass: test1234
+
+
+
 <p align="center">
 <a href="https://www.mongodb.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/mongodb-colored.svg" width="36" height="36" alt="Express" /></a>
 <a href="https://expressjs.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/express-colored-dark.svg" width="36" height="36" alt="Express" /></a>
