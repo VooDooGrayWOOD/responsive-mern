@@ -13,7 +13,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
             process.env.NODE_ENV === 'production'
                 ? `https://responsive-mern.voodoograywood.ru/posts`
                 : `http://localhost:3001/posts`
-        const response = await fetch(`http://localhost:3001/${apiUrl}`, {
+        const response = await fetch(`${apiUrl}`, {
             method: 'GET',
             headers: { Authorization: `Bearer ${token}` }
         })
