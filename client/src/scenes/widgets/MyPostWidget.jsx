@@ -45,8 +45,11 @@ const MyPostWidget = ({ picturePath }) => {
             formData.append('picture', image)
             formData.append('picturePath', image.name)
         }
-
-        const response = await fetch(`http://localhost:3001/posts`, {
+        const apiUrl =
+            process.env.NODE_ENV === 'production'
+                ? `https://responsive-mern.voodoograywood.ru/posts`
+                : `http://localhost:3001/posts`
+        const response = await fetch(`${apiUrl}`, {
             method: 'POST',
             headers: { Authorization: `Bearer ${token}` },
             body: formData

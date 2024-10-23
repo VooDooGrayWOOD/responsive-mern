@@ -35,17 +35,18 @@ const PostWidget = ({
     const primary = palette.primary.main
 
     const patchLike = async () => {
-        const response = await fetch(
-            `http://localhost:3001/posts/${postId}/like`,
-            {
-                method: 'PATCH',
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ userId: loggedInUserId })
-            }
-        )
+        const apiUrl =
+            process.env.NODE_ENV === 'production'
+                ? `https://responsive-mern.voodoograywood.ru/posts/${postId}/like`
+                : `http://localhost:3001/posts/${postId}/like`
+        const response = await fetch(`${apiUrl}`, {
+            method: 'PATCH',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ userId: loggedInUserId })
+        })
         const updatedPost = await response.json()
         dispatch(setPost({ post: updatedPost }))
     }

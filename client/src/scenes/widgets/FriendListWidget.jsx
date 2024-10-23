@@ -12,13 +12,14 @@ const FriendListWidget = ({ userId }) => {
     const friends = useSelector((state) => state.user.friends)
 
     const getFriends = async () => {
-        const response = await fetch(
-            `http://localhost:3001/users/${userId}/friends`,
-            {
-                method: 'GET',
-                headers: { Authorization: `Bearer ${token}` }
-            }
-        )
+        const apiUrl =
+            process.env.NODE_ENV === 'production'
+                ? `https://responsive-mern.voodoograywood.ru/users/${userId}/friends`
+                : `http://localhost:3001/users/${userId}/friends`
+        const response = await fetch(`${apiUrl}`, {
+            method: 'GET',
+            headers: { Authorization: `Bearer ${token}` }
+        })
         const data = await response.json()
         await dispatch(setFriends({ friends: data }))
     }

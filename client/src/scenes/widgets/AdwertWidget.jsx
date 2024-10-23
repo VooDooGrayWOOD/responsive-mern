@@ -7,7 +7,10 @@ const AdwertWidget = () => {
     const dark = palette.neutral.dark
     const main = palette.neutral.main
     const medium = palette.neutral.medium
-
+    const apiUrl =
+        process.env.NODE_ENV === 'production'
+            ? `https://responsive-mern.voodoograywood.ru/assets/info4.webp`
+            : `http://localhost:3001/assets/info4.webp`
     return (
         <WidgetWrapper>
             <FlexBetween>
@@ -20,8 +23,8 @@ const AdwertWidget = () => {
                 width="100%"
                 height="auto"
                 alt="advert"
-                src="http://localhost:3001/assets/info4.webp"
-                style={{ borderRadius: '0.75rem', margin: '0.75rem' }}
+                src={`${apiUrl}`}
+                style={{ borderRadius: '0.75rem', margin: '0.75rem 0' }}
             />
             <FlexBetween>
                 <Typography color={main}>MikaCosmetics</Typography>

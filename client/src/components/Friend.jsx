@@ -22,16 +22,17 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
     const isFriend = friends.find((friend) => friend._id === friendId)
 
     const patchFriend = async () => {
-        const response = await fetch(
-            `http://localhost:3001/users/${_id}/${friendId}`,
-            {
-                method: 'PATCH',
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
+        const apiUrl =
+            process.env.NODE_ENV === 'production'
+                ? `https://responsive-mern.voodoograywood.ru/users/${_id}/${friendId}`
+                : `http://localhost:3001/users/${_id}/${friendId}`
+        const response = await fetch(`${apiUrl}`, {
+            method: 'PATCH',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
             }
-        )
+        })
         const data = await response.json()
         dispatch(setFriends({ friends: data }))
     }

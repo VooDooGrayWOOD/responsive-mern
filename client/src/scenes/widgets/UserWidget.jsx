@@ -22,7 +22,11 @@ const UserWidget = ({ userId, picturePath }) => {
     const main = palette.neutral.main
 
     const getUser = async () => {
-        const response = await fetch(`http://localhost:3001/users/${userId}`, {
+        const apiUrl =
+            process.env.NODE_ENV === 'production'
+                ? `https://responsive-mern.voodoograywood.ru/users/${userId}`
+                : `http://localhost:3001/users/${userId}`
+        const response = await fetch(`${apiUrl}`, {
             method: 'GET',
             headers: { Authorization: `Bearer ${token}` }
         })

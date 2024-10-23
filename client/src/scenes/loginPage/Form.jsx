@@ -61,14 +61,14 @@ const Form = () => {
             formData.append(value, values[value])
         }
         formData.append('picturePath', values.picture.name)
-
-        const savedUserResponse = await fetch(
-            'http://localhost:3001/auth/register',
-            {
-                method: 'POST',
-                body: formData
-            }
-        )
+        const apiUrl =
+            process.env.NODE_ENV === 'production'
+                ? 'https://responsive-mern.voodoograywood.ru/auth/register'
+                : 'http://localhost:3001/auth/register'
+        const savedUserResponse = await fetch(`${apiUrl}`, {
+            method: 'POST',
+            body: formData
+        })
         const savedUser = await savedUserResponse.json()
         onSubmitProps.resetForm()
 
