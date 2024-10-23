@@ -50,7 +50,10 @@ const PostWidget = ({
         const updatedPost = await response.json()
         dispatch(setPost({ post: updatedPost }))
     }
-
+    const apiUrlPicturePath =
+        process.env.NODE_ENV === 'production'
+            ? `https://responsive-mern.voodoograywood.ru/assets/${picturePath}`
+            : `http://localhost:3001/assets/${picturePath}`
     return (
         <WidgetWrapper m="2rem 0">
             <Friend
@@ -68,7 +71,7 @@ const PostWidget = ({
                     height="auto"
                     alt="post"
                     style={{ borderRadius: '0.75rem', marginTop: '0.75rem' }}
-                    src={`http://localhost:3001/assets/${picturePath}`}
+                    src={`${apiUrlPicturePath}`}
                 />
             )}
             <FlexBetween mt="0.25rem">

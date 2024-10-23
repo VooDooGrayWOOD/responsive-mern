@@ -8,7 +8,11 @@ const UserImage = ({ image, size = '60px' }) => {
                 width={size}
                 height={size}
                 alt="user"
-                src={`http://localhost:3001/assets/${image}`}
+                src={
+                    process.env.NODE_ENV === 'production'
+                        ? `https://responsive-mern.voodoograywood.ru/assets/${image}`
+                        : `http://localhost:3001/assets/${image}`
+                }
             />
         </Box>
     )
