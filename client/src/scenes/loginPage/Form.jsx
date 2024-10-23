@@ -78,24 +78,33 @@ const Form = () => {
     }
 
     const login = async (values, onSubmitProps) => {
-        const loggedInResponse = await fetch(
-            'http://localhost:3001/auth/login',
-            {
+        try {
+            const apiUrl =
+                process.env.NODE_ENV === 'production'
+                    ? 'https://responsive-mern.voodoograywood.ru/auth/login'
+                    : 'http://localhost:3001/auth/login'
+            const loggedInResponse = await fetch(apiUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(values)
+            })
+            if (!loggedInResponse.ok) {
+                throw new Error('Ошибка при авторизации')
             }
-        )
-        const loggedIn = await loggedInResponse.json()
-        onSubmitProps.resetForm()
-        if (loggedIn) {
-            dispatch(
-                setLogin({
-                    user: loggedIn.user,
-                    token: loggedIn.token
-                })
-            )
-            navigate('/home')
+
+            const loggedIn = await loggedInResponse.json()
+            onSubmitProps.resetForm()
+            if (loggedIn) {
+                dispatch(
+                    setLogin({
+                        user: loggedIn.user,
+                        token: loggedIn.token
+                    })
+                )
+                navigate('/home')
+            }
+        } catch (error) {
+            console.error('Ошибка: ', error)
         }
     }
 
